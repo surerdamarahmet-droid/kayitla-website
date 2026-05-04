@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gizlilik Politikası — Kayıtla</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0a1628;
+    --navy2: #0d2545;
+    --blue: #185FA5;
+    --blue-light: #378ADD;
+    --blue-pale: #85B7EB;
+    --blue-ghost: #E6F1FB;
+    --white: #ffffff;
+    --gray: #64748B;
+    --gray-light: #F8FAFC;
+    --border: #E2E8F0;
+    --green: #1D9E75;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--gray-light);
+    color: #1e293b;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* Header */
+  header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 60%, #0a3060 100%);
+    padding: 48px 24px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: rgba(24,95,165,0.15);
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 60px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(24,95,165,0.08);
+  }
+
+  .header-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .logo-badge {
+    width: 36px; height: 36px;
+    background: var(--blue);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: white;
+    font-weight: 400;
+  }
+
+  .logo-name {
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+    letter-spacing: 0.3px;
+  }
+
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 5vw, 38px);
+    color: white;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  header p {
+    color: var(--blue-pale);
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  /* Main */
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* TOC */
+  .toc {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 40px;
+  }
+
+  .toc-title {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 16px;
+  }
+
+  .toc ol {
+    padding-left: 20px;
+    display: grid;
+    gap: 6px;
+  }
+
+  .toc a {
+    color: var(--blue);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+
+  .toc a:hover { color: var(--navy); }
+
+  /* Sections */
+  section {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin-bottom: 16px;
+    scroll-margin-top: 24px;
+  }
+
+  section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-num {
+    width: 28px; height: 28px;
+    background: var(--blue-ghost);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--blue);
+    flex-shrink: 0;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  section p {
+    color: #334155;
+    margin-bottom: 14px;
+    font-size: 15px;
+  }
+
+  section p:last-child { margin-bottom: 0; }
+
+  section h3 {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--navy);
+    margin: 20px 0 10px;
+  }
+
+  /* Tag list */
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0;
+  }
+
+  .tag {
+    background: var(--blue-ghost);
+    color: var(--blue);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  /* Info box */
+  .info-box {
+    background: #F0FDF8;
+    border: 1px solid #6EE7C7;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .info-icon {
+    width: 20px; height: 20px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .info-box p { margin: 0; font-size: 14px; color: #0f4b38; }
+
+  /* Rights list */
+  .rights-list {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    margin: 12px 0;
+  }
+
+  .rights-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: #334155;
+  }
+
+  .rights-list li::before {
+    content: '→';
+    color: var(--blue);
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Third party */
+  .third-party-grid {
+    display: grid;
+    gap: 10px;
+    margin: 12px 0;
+  }
+
+  .third-party-item {
+    background: var(--gray-light);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .third-party-name {
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--navy);
+  }
+
+  .third-party-role {
+    font-size: 13px;
+    color: var(--gray);
+  }
+
+  /* Contact */
+  .contact-card {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-top: 16px;
+  }
+
+  .contact-card p {
+    color: var(--blue-pale);
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+
+  .contact-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    padding: 10px 18px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+
+  .contact-email:hover { background: rgba(255,255,255,0.18); }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--gray);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    margin-top: 24px;
+    background: white;
+  }
+
+  footer a { color: var(--blue); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    section { padding: 24px 20px; }
+    .toc { padding: 20px; }
+    .contact-card { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-row">
+      <div class="logo-badge">K</div>
+      <span class="logo-name">Kayıtla</span>
+    </div>
+    <h1>Gizlilik Politikası</h1>
+    <p>Son güncelleme: Mayıs 2026 &nbsp;·&nbsp; Sürüm 1.0</p>
+  </div>
+</header>
+
+<main>
+
+  <nav class="toc">
+    <div class="toc-title">İçindekiler</div>
+    <ol>
+      <li><a href="#s1">Veri Sorumlusu</a></li>
+      <li><a href="#s2">İşlenen Kişisel Veriler</a></li>
+      <li><a href="#s3">Verilerin İşlenme Amaçları ve Hukuki Dayanakları</a></li>
+      <li><a href="#s4">Veri Güvenliği</a></li>
+      <li><a href="#s5">Üçüncü Taraf Hizmetler</a></li>
+      <li><a href="#s6">Verilerin Saklanma Süresi</a></li>
+      <li><a href="#s7">Kullanıcı Hakları</a></li>
+      <li><a href="#s8">Çocukların Gizliliği</a></li>
+      <li><a href="#s9">Politika Değişiklikleri</a></li>
+      <li><a href="#s10">İletişim</a></li>
+    </ol>
+  </nav>
+
+  <section id="s1">
+    <h2><span class="section-num">1</span>Veri Sorumlusu</h2>
+    <p>Kayıtla uygulaması ("Uygulama"), çalışma sürelerinin kriptografik zaman damgası ve konum doğrulaması ile kayıt altına alınmasına yönelik bir mobil uygulamadır.</p>
+    <p>6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") kapsamında veri sorumlusu sıfatıyla hareket eden Kayıtla, kullanıcılara ait kişisel verileri işbu Gizlilik Politikası çerçevesinde işlemektedir.</p>
+    <p><strong>İletişim:</strong> kayitlaapp@gmail.com</p>
+  </section>
+
+  <section id="s2">
+    <h2><span class="section-num">2</span>İşlenen Kişisel Veriler</h2>
+
+    <h3>Kimlik ve İletişim Verileri</h3>
+    <div class="tag-list">
+      <span class="tag">Ad Soyad</span>
+      <span class="tag">E-posta Adresi</span>
+      <span class="tag">Telefon Numarası</span>
+      <span class="tag">Doğum Tarihi</span>
+      <span class="tag">TC Kimlik Numarası (şifreli)</span>
+    </div>
+
+    <h3>İş ve Çalışma Verileri</h3>
+    <div class="tag-list">
+      <span class="tag">İşyeri Adı ve Konumu</span>
+      <span class="tag">Pozisyon / Görev</span>
+      <span class="tag">İşe Başlama Tarihi</span>
+      <span class="tag">Aylık Ücret</span>
+      <span class="tag">Sigorta Durumu</span>
+      <span class="tag">Çalışma Süreleri</span>
+      <span class="tag">Fazla Mesai Kayıtları</span>
+    </div>
+
+    <h3>Teknik ve Konum Verileri</h3>
+    <div class="tag-list">
+      <span class="tag">GPS Koordinatları</span>
+      <span class="tag">IP Adresi</span>
+      <span class="tag">Cihaz Bilgileri</span>
+      <span class="tag">RFC 3161 Zaman Damgası</span>
+      <span class="tag">Kriptografik Hash Değerleri</span>
+    </div>
+
+    <h3>Medya Verileri</h3>
+    <div class="tag-list">
+      <span class="tag">Fotoğraflar</span>
+      <span class="tag">Videolar</span>
+      <span class="tag">EXIF Meta Verileri</span>
+    </div>
+
+    <div class="info-box">
+      <div class="info-icon">✓</div>
+      <p>TC kimlik numarası şifreli (encrypted) olarak saklanmakta olup hiçbir zaman düz metin olarak işlenmemektedir.</p>
+    </div>
+  </section>
+
+  <section id="s3">
+    <h2><span class="section-num">3</span>Verilerin İşlenme Amaçları ve Hukuki Dayanakları</h2>
+
+    <h3>Hizmetin Sunulması</h3>
+    <p>Çalışma sürelerinin kayıt altına alınması, coğrafi sınır doğrulaması, RFC 3161 zaman damgası oluşturulması, iş arkadaşı çapraz doğrulama ve raporlama hizmetleri sunulması amacıyla.</p>
+    <p><strong>Hukuki dayanak:</strong> KVKK md. 5/2-c (sözleşmenin kurulması veya ifası)</p>
+
+    <h3>Hukuki İspat Altyapısı</h3>
+    <p>Kullanıcının talep etmesi hâlinde hukuki uyuşmazlıklarda kullanılmaya elverişli çalışma kayıtları oluşturulması amacıyla.</p>
+    <p><strong>Hukuki dayanak:</strong> KVKK md. 5/2-a (açık rıza)</p>
+
+    <h3>Güvenlik ve Doğrulama</h3>
+    <p>Kayıt bütünlüğünün korunması, yetkisiz erişimin engellenmesi ve kötüye kullanımın önlenmesi amacıyla.</p>
+    <p><strong>Hukuki dayanak:</strong> KVKK md. 5/2-f (meşru menfaat)</p>
+
+    <h3>Yasal Yükümlülükler</h3>
+    <p>Yürürlükteki mevzuat kapsamındaki yükümlülüklerin yerine getirilmesi amacıyla.</p>
+    <p><strong>Hukuki dayanak:</strong> KVKK md. 5/2-ç (kanuni yükümlülük)</p>
+  </section>
+
+  <section id="s4">
+    <h2><span class="section-num">4</span>Veri Güvenliği</h2>
+
+    <p>Kayıtla, kullanıcı verilerinin güvenliğini sağlamak amacıyla aşağıdaki teknik ve idari tedbirleri uygulamaktadır:</p>
+
+    <div class="info-box">
+      <div class="info-icon">✓</div>
+      <p><strong>RFC 3161 Kriptografik Zaman Damgası:</strong> Her çalışma kaydı, bağımsız bir zaman damgası otoritesi tarafından kriptografik olarak imzalanmaktadır. Veriler sonradan değiştirilemez.</p>
+    </div>
+
+    <div class="info-box">
+      <div class="info-icon">✓</div>
+      <p><strong>SHA Hash Algoritması:</strong> Her kaydın parmak izi niteliğinde özet değeri hesaplanmakta; herhangi bir değişiklik anında tespit edilebilmektedir.</p>
+    </div>
+
+    <div class="info-box">
+      <div class="info-icon">✓</div>
+      <p><strong>Satır Düzeyinde Güvenlik (RLS):</strong> Her kullanıcı yalnızca kendi verilerine erişebilir. Başka kullanıcıların verilerine erişim teknik olarak engellenmiştir.</p>
+    </div>
+
+    <div class="info-box">
+      <div class="info-icon">✓</div>
+      <p><strong>HTTPS / TLS Şifreleme:</strong> Tüm veri iletimi şifreli kanallar üzerinden gerçekleştirilmektedir.</p>
+    </div>
+
+    <div class="info-box">
+      <div class="info-icon">✓</div>
+      <p><strong>TC Kimlik Şifreleme:</strong> TC kimlik numarası yalnızca şifreli biçimde saklanmakta, düz metin olarak işlenmemektedir.</p>
+    </div>
+  </section>
+
+  <section id="s5">
+    <h2><span class="section-num">5</span>Üçüncü Taraf Hizmetler</h2>
+
+    <p>Uygulama, aşağıdaki üçüncü taraf hizmet sağlayıcılarından yararlanmaktadır:</p>
+
+    <div class="third-party-grid">
+      <div class="third-party-item">
+        <div>
+          <div class="third-party-name">Supabase</div>
+          <div class="third-party-role">Veritabanı, kimlik doğrulama ve dosya depolama</div>
+        </div>
+      </div>
+      <div class="third-party-item">
+        <div>
+          <div class="third-party-name">freeTSA.org</div>
+          <div class="third-party-role">RFC 3161 uyumlu kriptografik zaman damgası otoritesi</div>
+        </div>
+      </div>
+      <div class="third-party-item">
+        <div>
+          <div class="third-party-name">Google (Sign in with Google)</div>
+          <div class="third-party-role">Opsiyonel kimlik doğrulama</div>
+        </div>
+      </div>
+      <div class="third-party-item">
+        <div>
+          <div class="third-party-name">Apple (Sign in with Apple)</div>
+          <div class="third-party-role">Opsiyonel kimlik doğrulama</div>
+        </div>
+      </div>
+      <div class="third-party-item">
+        <div>
+          <div class="third-party-name">api.ipify.org</div>
+          <div class="third-party-role">IP adresi tespiti</div>
+        </div>
+      </div>
+    </div>
+
+    <p>Bu hizmet sağlayıcılar, yalnızca hizmetin sunulması amacıyla gerekli ölçüde veriye erişmektedir. Kendi gizlilik politikaları kapsamında hareket etmektedirler.</p>
+  </section>
+
+  <section id="s6">
+    <h2><span class="section-num">6</span>Verilerin Saklanma Süresi</h2>
+
+    <p>Kişisel veriler, işlenme amacının gerektirdiği süre boyunca ve yürürlükteki mevzuatta öngörülen süreler gözetilerek saklanmaktadır.</p>
+
+    <h3>Genel Kural</h3>
+    <p>Kullanıcı hesabının aktif olduğu süre boyunca veriler saklanmaktadır. Hesabın silinmesi talep edildiğinde, yasal saklama yükümlülükleri saklı kalmak kaydıyla veriler silinmektedir.</p>
+
+    <h3>Çalışma Kayıtları</h3>
+    <p>İş hukuku uyuşmazlıklarında zamanaşımı süreleri dikkate alınarak çalışma kayıtları en az 5 yıl süreyle saklanabilmektedir. Kullanıcı dilediği zaman kendi kayıtlarını silebilir.</p>
+
+    <h3>RFC 3161 Zaman Damgaları</h3>
+    <p>Kriptografik zaman damgaları, kaydın bütünlüğünün ispatı açısından kalıcı nitelik taşımaktadır.</p>
+  </section>
+
+  <section id="s7">
+    <h2><span class="section-num">7</span>Kullanıcı Hakları</h2>
+
+    <p>KVKK'nın 11. maddesi kapsamında aşağıdaki haklara sahipsiniz:</p>
+
+    <ul class="rights-list">
+      <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme</li>
+      <li>Kişisel verileriniz işlenmişse buna ilişkin bilgi talep etme</li>
+      <li>Kişisel verilerinizin işlenme amacını ve bunların amacına uygun kullanılıp kullanılmadığını öğrenme</li>
+      <li>Yurt içinde veya yurt dışında kişisel verilerinizin aktarıldığı üçüncü kişileri bilme</li>
+      <li>Kişisel verilerinizin eksik veya yanlış işlenmiş olması hâlinde bunların düzeltilmesini isteme</li>
+      <li>KVKK'nın 7. maddesinde öngörülen şartlar çerçevesinde kişisel verilerinizin silinmesini veya yok edilmesini isteme</li>
+      <li>İşlenen verilerin münhasıran otomatik sistemler vasıtasıyla analiz edilmesi suretiyle aleyhinize bir sonucun ortaya çıkmasına itiraz etme</li>
+      <li>Kişisel verilerinizin kanuna aykırı olarak işlenmesi sebebiyle zarara uğramanız hâlinde zararın giderilmesini talep etme</li>
+    </ul>
+
+    <div class="info-box">
+      <div class="info-icon">✓</div>
+      <p>Bu haklarınızı kullanmak için kayitlaapp@gmail.com adresine e-posta gönderebilir ya da uygulama içindeki "Hesabımı Kalıcı Olarak Sil" özelliğini kullanabilirsiniz.</p>
+    </div>
+  </section>
+
+  <section id="s8">
+    <h2><span class="section-num">8</span>Çocukların Gizliliği</h2>
+    <p>Kayıtla uygulaması, 18 yaşın altındaki bireylere yönelik tasarlanmamıştır. Uygulamanın çalışma süresi kayıt ve hukuki belgeleme amacıyla geliştirilmiş olması nedeniyle hedef kitle çalışan yetişkinlerdir.</p>
+    <p>18 yaşın altındaki bir kullanıcıya ait veri toplandığının farkına varılması hâlinde söz konusu veriler derhal silinecektir.</p>
+  </section>
+
+  <section id="s9">
+    <h2><span class="section-num">9</span>Politika Değişiklikleri</h2>
+    <p>Bu Gizlilik Politikası zaman zaman güncellenebilir. Önemli değişiklikler uygulama içi bildirim veya e-posta yoluyla kullanıcılara duyurulacaktır.</p>
+    <p>Değişikliğin yürürlüğe girmesinin ardından uygulamayı kullanmaya devam etmeniz, güncellenmiş politikayı kabul ettiğiniz anlamına gelir.</p>
+    <p>Politikanın güncel sürümüne her zaman bu sayfa üzerinden ulaşabilirsiniz.</p>
+  </section>
+
+  <section id="s10">
+    <h2><span class="section-num">10</span>İletişim</h2>
+    <p>Gizlilik politikamıza ilişkin soru, görüş veya talepleriniz için bizimle iletişime geçebilirsiniz.</p>
+
+    <div class="contact-card">
+      <p>Veri sorumlusu sıfatıyla her türlü talebinizi aşağıdaki e-posta adresinden iletebilirsiniz. Talepler en geç 30 gün içinde yanıtlanacaktır.</p>
+      <a href="mailto:kayitlaapp@gmail.com" class="contact-email">
+        ✉ kayitlaapp@gmail.com
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Kayıtla · <a href="#">Ana Sayfa</a> · Son güncelleme: Mayıs 2026</p>
+</footer>
+
+</body>
+</html>
